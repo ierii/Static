@@ -50,6 +50,7 @@ h1 {
   display: block;
 }
 #wrapper li .content {
+  display: none;
   width: 98%;
   padding: 1%;
   margin-top: 1%;

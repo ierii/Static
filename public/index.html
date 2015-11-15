@@ -10,52 +10,31 @@
 <body>
 	<h1>静态资源列表</h1>
 	<ul id="wrapper">
-		<li>
-			<div class="menu"><span class="des"><strong class="date">2015-11-15</strong> 主题：<strong class="info">天空的大鱼</strong></span></div>
-			<div class="content">
-				<div class="item head">
-					<img src="database/test/22.jpg" alt="">
-					<span><input type="text"><button>COPY</button></span>
-					<span><input type="text"><button>COPY</button></span>
-				</div>
-				<div class="item">
-					<img src="database/test/23.jpg" alt="">
-					<span></span>
-					<span></span>
-				</div>
-				<div class="item">
-					<img src="database/test/24.jpg" alt="">
-					<span></span>
-					<span></span>
-				</div>
-				<div class="item">
-					<img src="database/test/22.jpg" alt="">
-					<span></span>
-					<span></span>
-				</div>
-				<div class="item">
-					<img src="database/test/23.jpg" alt="">
-					<span></span>
-					<span></span>
-				</div>
-				<div class="item">
-					<img src="database/test/23.jpg" alt="">
-					<span></span>
-					<span></span>
-				</div>
-				<div class="item">
-					<img src="database/test/23.jpg" alt="">
-					<span></span>
-					<span></span>
-				</div>
-				<div class="item">
-					<img src="database/test/23.jpg" alt="">
-					<span></span>
-					<span></span>
-				</div>
-			</div>
-		</li>
+
 	</ul>
+	<script type="template" id="menuListTemplate">
+	{@if menuList}
+	{@each menuList as item}
+	<li>
+		<div class="menu" data-url="${item.url}">
+			<span class="des"><strong class="date">${item.date}</strong>主题：<strong class="info">${item.info}</strong></span>
+		</div>
+		<div class="content"></div>
+	</li>
+	{@/each}
+	{@/if}
+	</script>
+	<script type="template" id="contentTemplate">
+	{@if contentList}
+	{@each contentList as item}
+	<div class="item head">
+		<img src="{@item.url}" alt="">
+		<span><input type="text" value=""><button>COPY</button></span>
+		<span><input type="text" value=""><button>COPY</button></span>
+	</div>
+	{@/each}
+	{@/if}
+	</script>
 	<script src="script/juicer-min.js"></script>
 	<script src="script/jquery.min.js"></script>
 	<script src="script/masonry.min.js"></script>

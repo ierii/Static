@@ -1,0 +1,22 @@
+{
+	"menuList": [{
+			"date": "2015-11-15",
+			"info": "天空的大鱼",
+			"url": "data/temp.json"
+	},
+		{
+			"date": "2015-11-16",
+			"info": "礼拜三的尼罗河",
+			"url": "data/temp.json"
+	},
+		{
+			"date": "2015-11-17",
+			"info": "礼拜三的尼罗河",
+			"url": "data/temp.json"
+	},
+		{
+			"date": "2015-11-18",
+			"info": "礼拜三的尼罗河",
+			"url": "data/temp.json"
+	}]
+}
