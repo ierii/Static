@@ -2,6 +2,7 @@ $(document).ready(function () {
 	var ME = {
 		USE: {},
 		DOM: {
+			$doc:$(document),
 			$wrapper: $('#wrapper'),
 			$menus: $('#wrapper li .menu'),
 			$contents: $('#wrapper li .content'),
@@ -18,8 +19,8 @@ $(document).ready(function () {
 			handle($wrapper);
 		}
 	};
-	/*瀑布流设置*/
-	ME.DOM.$contents = $('.content').masonry({
+	/*登dom结构*/
+	ME.DOM.$contents.masonry({
 		itemSelector: '.item',
 		columnWidth: '.head',
 		percentPosition: true
@@ -33,14 +34,21 @@ $(document).ready(function () {
 			.done(function (data) {
 				buildMenu(data, function ($wrapper) {
 					$wrapper.on('click', 'li .menu', function (event) {
-						/*隐藏或显示列表*/
-						$(this).next().toggle('slow');
+						$this=$(this);
+						$this.find('i').text('Loding......');
+						$this.on('upstate',function(){
+							$this.text('Load OK');
+						});
+						$this.next().toggle('slow');
 					});
 				});
 			})
 			.fail(function () {
 				console.log('数据有错！');
 			});
+		ME.DOM.$contents.on('init',function(event,data){
+
+		});
 
 	})();
 });
