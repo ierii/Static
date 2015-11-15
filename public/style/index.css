@@ -57,8 +57,11 @@ h1 {
   border-radius: 5px;
   overflow: hidden;
 }
+#wrapper li .content .head,
 #wrapper li .content .item {
-  width: 33.33%;
+  width: 33%;
+}
+#wrapper li .content .item {
   float: left;
   margin: 1% 0;
 }
