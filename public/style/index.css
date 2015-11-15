@@ -60,10 +60,9 @@ h1 {
 #wrapper li .content .head,
 #wrapper li .content .item {
   display: block;
-  width: 32.5%;
+  width: 32.6%;
 }
 #wrapper li .content .item {
-  border: 1px solid #ccc;
   float: left;
   margin: 1% 0;
 }
