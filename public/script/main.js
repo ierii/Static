@@ -1,16 +1,16 @@
 $(document).ready(function () {
 	var ME = {
 		USE: {},
-		DOM: {}
+		DOM: {
+			$contents: {}
+		}
 	};
-	$('.content').masonry({
+	var $contents = $('.content').masonry({
 		itemSelector: '.item',
 		columnWidth: '.head',
-		isAnimated: true,
 		percentPosition: true
-
 	});
-	$('.content').imagesLoaded().progress(function () {
-		$('.content').masonry('layout');
+	$contents.imagesLoaded().progress(function () {
+		$contents.masonry('layout');
 	});
 });
