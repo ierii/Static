@@ -40,7 +40,7 @@ $(document).ready(function () {
 							url: url,
 							index: index
 						});
-						$content.toggle('slow');
+						$content.fadeToggle('slow');
 					});
 				});
 			})
@@ -65,9 +65,8 @@ $(document).ready(function () {
 						percentPosition: true
 					});
 					$content.imagesLoaded(function () {
-						$content.masonry('layout');
 						$content.prev().trigger('upstate');
-//						$content.show();
+						$content.masonry('layout');
 					}).progress(function () {
 						$content.masonry('layout');
 					});

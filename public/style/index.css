@@ -50,11 +50,10 @@ h1 {
   display: block;
 }
 #wrapper li .menu span i.state {
-  display: inline-block;
-  padding-left: 20px;
   color: #b7c3c3;
 }
 #wrapper li .content {
+  display: none;
   width: 98%;
   padding: 1%;
   margin-top: 1%;
@@ -67,7 +66,6 @@ h1 {
   width: 32.6%;
 }
 #wrapper li .content .item {
-  float: left;
   margin: 1% 0;
 }
 #wrapper li .content .item img,

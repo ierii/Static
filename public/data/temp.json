@@ -1,25 +1,25 @@
 {
 	"filesList": [{
 			"type": "img",
-			"url": "database/test/22.jpg"
+			"url": "http://kinlidb.coding.io/database/imgs/0.jpg"
 	}, {
 			"type": "img",
-			"url": "database/test/23.jpg"
+			"url": "http://kinlidb.coding.io/database/imgs/1.jpg"
 	}, {
 			"type": "img",
-			"url": "database/test/24.jpg"
+			"url": "http://kinlidb.coding.io/database/imgs/2.jpg"
 	}, {
 			"type": "img",
-			"url": "database/test/22.jpg"
+			"url": "http://kinlidb.coding.io/database/imgs/3.jpg"
 	}, {
 			"type": "img",
-			"url": "database/test/23.jpg"
+			"url": "http://ww2.sinaimg.cn/large/e8faa973jw1eqord1k21yj20xc18gnc4.jpg"
 	},
 		{
 			"type": "img",
-			"url": "database/test/24.jpg"
+			"url": "http://ww2.sinaimg.cn/large/e8faa973jw1equssoarjfj20tm18gn8q.jpg"
 	}, {
 			"type": "other",
-			"url": "database/default/file.png"
+			"url": "http://kinlidb.coding.io/database/imgs/4.jpg"
 	}]
 }
