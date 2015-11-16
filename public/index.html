@@ -25,10 +25,10 @@
 	{@/if}
 	</script>
 	<script type="template" id="contentTemplate">
-	{@if contentList}
-	{@each contentList as item}
+	{@if filesList}
+	{@each filesList as item}
 	<div class="item head">
-		<img src="{@item.url}" alt="">
+		<img src="${item.url}" alt="">
 		<span><input type="text" value=""><button>COPY</button></span>
 		<span><input type="text" value=""><button>COPY</button></span>
 	</div>
