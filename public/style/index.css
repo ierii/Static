@@ -69,6 +69,7 @@ h1 {
   margin: 1% 0;
 }
 #wrapper li .content .item img,
+#wrapper li .content .item p,
 #wrapper li .content .item span {
   display: block;
   width: 94%;
@@ -77,6 +78,11 @@ h1 {
 }
 #wrapper li .content .item img {
   border-radius: 5px;
+}
+#wrapper li .content .item p {
+  text-align: center;
+  line-height: 100px;
+  height: 100px;
 }
 #wrapper li .content .item span {
   padding: 0;

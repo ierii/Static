@@ -1,7 +1,8 @@
 $(document).ready(function () {
 	var ME = {
 		USE: {
-			menuDatas: {}
+			menuDatas: {},
+			basePath: ''
 		},
 		DOM: {
 			$doc: $(document),
@@ -21,6 +22,59 @@ $(document).ready(function () {
 			handle($wrapper);
 		}
 	};
+	ME.METHODS.GetCurrPath = function () {
+		var loc = window.location.href,
+			path = loc.replace(/\w+\.html$/g, '');
+		return path;
+	};
+	ME.USE.basePath = ME.METHODS.GetCurrPath();
+	alert(ME.USE.basePath);
+	/*用于生成正常url*/
+	ME.TMP.register('buildURL', function (url) {
+		return ME.USE.basePath + url;
+	});
+	/*用来生成md url*/
+	ME.TMP.register('buildMURL', function (url) {
+		return '![](' + ME.USE.basePath + url + ')';
+	});
+	/*加载图片内容*/
+	ME.DOM.$wrapper.on('loadContent', 'li .content', function (event, data) {
+		var $this = $(this),
+			url = data.url,
+			index = data.index,
+			isHidden = $this.is(':hidden');
+		var buildContent = ME.METHODS.BuildDom($this, ME.DOM.$contentTemplate);
+		/*如果是代开的证明数据已经加载过了*/
+		if (!isHidden) return;
+		if (ME.USE.menuDatas[index]) return;
+		ME.USE.menuDatas[index] = url;
+		$.getJSON(url).done(function (data) {
+			buildContent(data, function ($content) {
+				$content.masonry({
+					itemSelector: '.item',
+					columnWidth: '.head',
+					percentPosition: true
+				});
+				$content.imagesLoaded(function () {
+					$content.prev().trigger('upstate');
+					$content.masonry('layout');
+					$content.trigger('buildCopy');
+				}).progress(function () {
+					$content.masonry('layout');
+				});
+			})
+		}).fail(function () {
+			console.log('获取数据失败！');
+		});
+	});
+	ME.DOM.$wrapper.on('buildCopy', 'li .content', function (event) {
+		var $this = $(this),
+			$items = $this.find('.item');
+		$items.each(function (i, elem) {
+			var $elem = $(elem),
+				$img
+		})
+	});
 	(function init() {
 		var buildMenu = ME.METHODS.BuildDom(ME.DOM.$wrapper, ME.DOM.$menuTemplate);
 		$.getJSON('data/main.json')
@@ -47,33 +101,6 @@ $(document).ready(function () {
 			.fail(function () {
 				console.log('数据有错！');
 			});
-		ME.DOM.$wrapper.on('loadContent', 'li .content', function (event, data) {
-			var $this = $(this),
-				url = data.url,
-				index = data.index,
-				isHidden = $this.is(':hidden');
-			var buildContent = ME.METHODS.BuildDom($this, ME.DOM.$contentTemplate);
-			/*如果是代开的证明数据已经加载过了*/
-			if (!isHidden) return;
-			if (ME.USE.menuDatas[index]) return;
-			ME.USE.menuDatas[index] = url;
-			$.getJSON(url).done(function (data) {
-				buildContent(data, function ($content) {
-					$content.masonry({
-						itemSelector: '.item',
-						columnWidth: '.head',
-						percentPosition: true
-					});
-					$content.imagesLoaded(function () {
-						$content.prev().trigger('upstate');
-						$content.masonry('layout');
-					}).progress(function () {
-						$content.masonry('layout');
-					});
-				})
-			}).fail(function () {
-				console.log('获取数据失败！');
-			});
-		});
+
 	})();
 });
