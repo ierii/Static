@@ -28,7 +28,6 @@ $(document).ready(function () {
 		return path;
 	};
 	ME.USE.basePath = ME.METHODS.GetCurrPath();
-	alert(ME.USE.basePath);
 	/*用于生成正常url*/
 	ME.TMP.register('buildURL', function (url) {
 		return ME.USE.basePath + url;
