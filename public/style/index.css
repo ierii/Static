@@ -55,17 +55,15 @@ h1 {
   color: #b7c3c3;
 }
 #wrapper li .content {
-  display: none;
   width: 98%;
   padding: 1%;
   margin-top: 1%;
   border: 1px solid #62aeb4;
   border-radius: 5px;
-  overflow: hidden;
 }
 #wrapper li .content .head,
 #wrapper li .content .item {
-  display: block;
+  display: inline-block;
   width: 32.6%;
 }
 #wrapper li .content .item {
