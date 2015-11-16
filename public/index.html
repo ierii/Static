@@ -11,6 +11,9 @@
 	<h1>静态资源列表</h1>
 	<ul id="wrapper">
 	</ul>
+	<div id="prompt">
+		资源地址已经复制到剪贴板，耶耶耶！
+	</div>
 	<script type="template" id="menuListTemplate">
 		{@if menuList} {@each menuList as item,index}
 		<li>
@@ -34,8 +37,8 @@
 			{@else}
 			<img src="database/default/file.jpg">
 			{@/if}
-			<span><input type="text" value="${item.url|buildURL}"><button>COPY</button></span>
-			<span><input type="text" value="${item.url|buildMURL}"><button>COPY</button></span>
+			<span class="url"><input type="text" value="${item.url|buildURL}"><button>COPY</button></span>
+			<span class="murl"><input type="text" value="${item.url|buildMURL}"><button>COPY</button></span>
 			</div>
 		{@/each} {@/if}
 	</script>
@@ -43,6 +46,7 @@
 	<script src="script/jquery.min.js"></script>
 	<script src="script/masonry.min.js"></script>
 	<script src="script/imagesloaded.min.js"></script>
+	<script src="script/jquery.zclip.min.js"></script>
 	<script src="script/main.js"></script>
 </body>
 

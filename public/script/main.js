@@ -6,6 +6,7 @@ $(document).ready(function () {
 		},
 		DOM: {
 			$doc: $(document),
+			$prompt:$('#prompt'),
 			$wrapper: $('#wrapper'),
 			$menus: $('#wrapper li .menu'),
 			$contents: $('#wrapper li .content'),
@@ -35,6 +36,9 @@ $(document).ready(function () {
 	/*用来生成md url*/
 	ME.TMP.register('buildMURL', function (url) {
 		return '![](' + ME.USE.basePath + url + ')';
+	});
+	ME.DOM.$doc.on('copyOK',function(){
+		ME.DOM.$prompt.show(400).delay(800).hide(400);
 	});
 	/*加载图片内容*/
 	ME.DOM.$wrapper.on('loadContent', 'li .content', function (event, data) {
@@ -66,13 +70,22 @@ $(document).ready(function () {
 			console.log('获取数据失败！');
 		});
 	});
+	/*出事化url的复制*/
 	ME.DOM.$wrapper.on('buildCopy', 'li .content', function (event) {
 		var $this = $(this),
 			$items = $this.find('.item');
-		$items.each(function (i, elem) {
-			var $elem = $(elem),
-				$img
-		})
+		$items.each(function (i, e) {
+			var $e = $(e);
+			var set = {
+				path: 'script/ZeroClipboard.swf',
+				copy: function () {
+					return $(this).prev().val();
+				}
+			}
+			$e.find('.url button').zclip(set);
+			$e.find('.murl button').zclip(set);
+		});
+
 	});
 	(function init() {
 		var buildMenu = ME.METHODS.BuildDom(ME.DOM.$wrapper, ME.DOM.$menuTemplate);

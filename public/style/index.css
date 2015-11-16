@@ -118,3 +118,20 @@ h1 {
   color: #000;
   background-color: #62aeb4;
 }
+#prompt {
+  display: none;
+  font-size: 18px;
+  position: fixed;
+  z-index: 1000;
+  width: 400px;
+  height: 100px;
+  color: #eaeaea;
+  border: 1px solid #5cd5de;
+  background-color: rgba(92, 213, 222, 0.47);
+  border-radius: 20px;
+  text-align: center;
+  line-height: 100px;
+  top: 20%;
+  left: 50%;
+  margin-left: -200px;
+}
