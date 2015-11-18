@@ -6,11 +6,12 @@ db.serialize(function() {
 
   var stmt = db.prepare("INSERT INTO lorem VALUES (?)");
   for (var i = 0; i < 10; i++) {
-      stmt.run("Ipsum " + i);
+      stmt.run("数据 " + i);
   }
   stmt.finalize();
 
   db.each("SELECT rowid AS id, info FROM lorem", function(err, row) {
+	  console.log(row);
       console.log(row.id + ": " + row.info);
   });
 });
