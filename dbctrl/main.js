@@ -1,4 +1,4 @@
-var CONFIG = require('../config/dbconfig.json');
+var CONFIG = require('../config/dbconfig.js');
 var sqlite3 = require('sqlite3').verbose();
 var db = new sqlite3.Database(CONFIG.dbpath),
 	prepareInsetTheme = db.prepare(config.insertTheme),

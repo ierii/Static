@@ -1,4 +1,4 @@
-{
+var config={
 	"dbpath":"./public/data/data.db",
 
 	"createThemeTba": "CREATE TABLE IF NOT EXISTS  theme(" +
@@ -20,4 +20,5 @@
 	"insertFilse": "INSERT INTO files(sid,type,path)VALUES(?,?,?)",
 	"selectFiles": "SELECT * FROM files where id=?"
 
-}
+};
+module.exports = config;
