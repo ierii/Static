@@ -1,25 +1,25 @@
 {
 	"filesList": [{
 			"type": "img",
-			"url": "database/test/22.jpg"
+			"url": "public/database/test/22.jpg"
 	}, {
 			"type": "img",
-			"url": "database/test/23.jpg"
+			"url": "public/database/test/23.jpg"
 	}, {
 			"type": "img",
-			"url": "database/test/24.jpg"
+			"url": "public/database/test/24.jpg"
 	}, {
 			"type": "img",
-			"url": "database/test/23.jpg"
+			"url": "public/database/test/23.jpg"
 	}, {
 			"type": "img",
-			"url": "database/test/22.jpg"
+			"url": "public/database/test/22.jpg"
 	},
 		{
 			"type": "img",
-			"url": "database/test/24.jpg"
+			"url": "public/database/test/24.jpg"
 	}, {
 			"type": "other",
-			"url": "database/default/file.jpg"
+			"url": "public/database/default/file.jpg"
 	}]
 }

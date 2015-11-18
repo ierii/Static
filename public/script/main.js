@@ -1,7 +1,9 @@
 $(document).ready(function () {
 	var ME = {
 		USE: {
+			mainurl:'public/data/main.json',
 			menuDatas: {},
+			ZeroClipboardPath:'public/script/ZeroClipboard.swf',
 			basePath: ''
 		},
 		DOM: {
@@ -77,7 +79,7 @@ $(document).ready(function () {
 		$items.each(function (i, e) {
 			var $e = $(e);
 			var set = {
-				path: 'script/ZeroClipboard.swf',
+				path: ME.USE.ZeroClipboardPath,
 				copy: function () {
 					return $(this).prev().val();
 				}
@@ -89,7 +91,7 @@ $(document).ready(function () {
 	});
 	(function init() {
 		var buildMenu = ME.METHODS.BuildDom(ME.DOM.$wrapper, ME.DOM.$menuTemplate);
-		$.getJSON('data/main.json')
+		$.getJSON(ME.USE.mainurl)
 			.done(function (data) {
 				buildMenu(data, function ($wrapper) {
 					$wrapper.on('click', 'li .menu', function (event) {
