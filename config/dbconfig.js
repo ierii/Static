@@ -1,5 +1,7 @@
 var config = {
-	dbpath: "data.db",
+	/*数据库的储存位置*/
+	dbpath: "../public/data/data.db",
+	/*用于建立基础的数据表*/
 	createThemeTba: "CREATE TABLE IF NOT EXISTS theme(" +
 		"id INTEGER PRIMARY KEY NOT NULL," +
 		"info TEXT NOT NULL," +
@@ -9,9 +11,14 @@ var config = {
 		"sid INTEGER REFERENCES theme(id) ON UPDATE CASCADE," +
 		"type TEXT NOT NULL," +
 		"path TEXT NOT NULL)",
-	insertTheme: "INSERT INTO theme(info)VALUES(?)",
+	/*主题表的基本操作*/
+	insertTheme: "INSERT INTO theme(info)VALUES($info)",
 	selectTheme: "SELECT * FROM theme",
-	insertFilse: "INSERT INTO files(sid,type,path)VALUES(?,?,?)",
-	selectFiles: "SELECT * FROM files where id=?"
+	deleteThemeFiles:"DELETE FROM files WHERE sid=$id",
+	deleteTheme:"DELETE FROM theme WHERE id=$id",
+	/*文件表的基本操作*/
+	insertFiles: "INSERT INTO files(sid,type,path)VALUES($sid,$type,$path)",
+	selectFiles: "SELECT * FROM files where sid=$sid",
+	deleteFiles:"DELETE FROM  files WHERE id=$id"
 }
 module.exports = config;
