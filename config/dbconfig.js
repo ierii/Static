@@ -1,6 +1,6 @@
 var config = {
-	dbpath:"data.db",
-	createThemeTba: "CREATE TABLE IF NOT EXISTS  theme(" +
+	dbpath: "data.db",
+	createThemeTba: "CREATE TABLE IF NOT EXISTS theme(" +
 		"id INTEGER PRIMARY KEY NOT NULL," +
 		"info TEXT NOT NULL," +
 		"date NOT NULL DEFAULT (datetime('now','localtime')))",

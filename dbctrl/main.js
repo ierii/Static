@@ -1,28 +1,36 @@
-var CONFIG = require('../config/dbconfig.js');
-console.log(CONFIG);
+var config = require('../config/dbconfig.js');
 var sqlite3 = require('sqlite3').verbose();
-var db = new sqlite3.Database(CONFIG.dbpath),
-	prepareInsetTheme = db.prepare(CONFIG.insertTheme),
-	prepareSelectTheme = db.prepare(CONFIG.selectTheme),
-	prepareInsetFiles = db.prepare(CONFIG.insertFilse),
-	prepareSelectFiles = db.prepare(CONFIG.selectFiles);
-var log = {
-	begin: function (info) {
-		console.log('begin to:' + info);
-	},
-	end: function (info) {
-		console.log('complete the:' + info);
+var prepare = {}
+var db = new sqlite3.Database(config.dbpath, function (err) {
+	if (err) {
+		console.log('打开或建立数据库失败！', err);
+		return;
 	}
-}
+	db.serialize(function () {
+		db.run(config.createThemeTba);
+		db.run(config.createFilesTba);
+	});
+	db.close();
+	console.log('数据库初始化成功！');
+});
 var dbctrl = {
-	init: function () {
+	insertTheme: function (data) {
 		db.serialize(function () {
-			log.begin('create table');
-			db.run(CONFIG.createThemeTba);
-			db.run(CONFIG.createFilesTba);
+			var prepareInsertTheme = db.prepare(config.insertTheme);
+			prepareInsertTheme.run(data,function(err){
+				if(err){
+					console.log('数据插入失败！',err);
+					return;
+				}
+				console.log('数据插入成功！');
+			});
+			prepareInsertTheme.finalize();
 		});
-		db.close();
 	},
+	closeDB:function(){
+		db.close();
+		console.log('关闭数据库......');
+	}
 };
-dbctrl.init();
+dbctrl.insertTheme('天空的大鱼');
 module.exports = dbctrl;

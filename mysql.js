@@ -1,5 +1,5 @@
 var sqlite3 = require('sqlite3').verbose();
-var db = new sqlite3.Database('static.db');
+var db = new sqlite3.Database('data.db');
 var config = {
 	buildThemeTba: "CREATE TABLE IF NOT EXISTS  theme(" +
 		"id INTEGER PRIMARY KEY NOT NULL," +
