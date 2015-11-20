@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+	<meta charset="UTF-8">
+	<title>拖拽上传</title>
+	<link rel="stylesheet" href="style/basic.min.css">
+	<link rel="stylesheet" href="style/dropzone.min.css">
+</head>
+
+<body>
+	<div id="dropzone">
+		<form action="" class="dropzone dz-clickable" id="demo-upload">
+
+			<div class="dz-message">
+				将文件拖至此处或点击上传.
+				<br>
+				<span class="note">(这仅仅是 dropzone 的一个演示示例. 选定的文件 <strong>并没有</strong> 真正上传.)</span>
+			</div>
+
+		</form>
+	</div>
+	<script src="script/jquery.min.js"></script>
+	<script src="script/dropzone.js"></script>
+	<script>
+		$('#dropzone').dropzone({
+			url: "handle-upload.php",
+			maxFiles: 10,
+			maxFilesize: 512,
+			acceptedFiles: ".js,.obj,.dae"
+		});
+	</script>
+</body>
+
+</html>

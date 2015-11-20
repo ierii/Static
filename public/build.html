@@ -5,6 +5,8 @@
 	<meta charset="UTF-8">
 	<title>静态构建</title>
 	<link rel="stylesheet" href="style/build.css">
+	<link rel="stylesheet" href="style/basic.min.css">
+	<link rel="stylesheet" href="style/dropzone.min.css">
 </head>
 
 <body>
@@ -24,33 +26,39 @@
 		</li>-->
 	</ul>
 	<div id="upwrapper">
-		<div id="dragPanel" class="item">请将文件拖拽到此处</div>
-		<div class="item">
-			<img src="database/test/22.jpg"><button>删除</button>
+		<button id="closeBtn">X</button>
+		<div id="dragPanel">请将文件拖拽到此处</div>
+		<div id="filesWrapper">
+			<div class="item">
+				<img src="database/test/22.jpg">
+				<button>删除</button>
+			</div>
+			<div class="item">
+				<img src="database/test/23.jpg">
+				<button>删除</button>
+			</div>
+			<div class="item">
+				<img src="database/test/24.jpg">
+				<button>删除</button>
+			</div>
 		</div>
-		<div class="item">
-			<img src="database/test/23.jpg"><button>删除</button>
-		</div>
-		<div class="item">
-			<img src="database/test/24.jpg"><button>删除</button>
-		</div>
+
 	</div>
 	<script type="template" id="menuTemplate">
-	{@if menuList}
-	{@each menuList as item,index}
-	<li class="delPro">
-		<span class="theme" data-id="${item.id}">
+		{@if menuList} {@each menuList as item,index}
+		<li class="delPro">
+			<span class="theme" data-id="${item.id}">
 		<strong>${item.date}</strong>&nbsp;主题：<strong>${item.info}</strong>
 		</span>
-		<button class="delBtn" data-id="${item.id}" data-fpath="${item.fpath}">删除</button>
-	</li>
-	{@/each}
-	{@/if}
+			<button class="delBtn" data-id="${item.id}" data-fpath="${item.fpath}">删除</button>
+		</li>
+		{@/each} {@/if}
 	</script>
 	<script src="script/juicer-min.js"></script>
 	<script src="script/jquery.min.js"></script>
 	<script src="script/masonry.min.js"></script>
 	<script src="script/imagesloaded.min.js"></script>
+	<script src="script/dropzone.js"></script>
 	<script src="script/build.js"></script>
 </body>
 

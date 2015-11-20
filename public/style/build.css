@@ -74,7 +74,6 @@ h1 {
   background-color: rgba(90, 185, 193, 0.59);
 }
 #upwrapper {
-  display: none;
   width: 86%;
   padding: 1%;
   border: 1px solid #62aeb4;
@@ -84,7 +83,28 @@ h1 {
   left: 50%;
   margin-left: -44%;
   border-radius: 20px;
-  overflow: hidden;
+}
+#upwrapper #closeBtn {
+  position: absolute;
+  right: 0px;
+  top: 0px;
+  width: 40px;
+  height: 40px;
+  text-align: center;
+  line-height: 40px;
+  background-color: transparent;
+  border: none;
+  border-left: 1px solid #62aeb4;
+  border-bottom: 1px solid #62aeb4;
+  color: #de0000;
+  font-size: 20px;
+  border-bottom-left-radius: 10px;
+  cursor: pointer;
+  -webkit-transition: all 0.5s;
+          transition: all 0.5s;
+}
+#upwrapper #closeBtn:hover {
+  color: #62aeb4;
 }
 #upwrapper #dragPanel {
   font-size: 20px;
@@ -93,9 +113,15 @@ h1 {
   border: 1px solid #3ea1a8;
   color: #fff;
   line-height: 300px;
-  width: 30%;
+  width: 100%;
+  margin: 2% auto;
 }
-#upwrapper .item {
+#upwrapper #filesWrapper {
+  display: block;
+  width: 100%;
+  overflow: hidden;
+}
+#upwrapper #filesWrapper .item {
   border-radius: 10px;
   display: block;
   float: left;
@@ -104,14 +130,14 @@ h1 {
   margin-bottom: 2%;
   position: relative;
 }
-#upwrapper .item img {
+#upwrapper #filesWrapper .item img {
   display: block;
   width: 100%;
   margin: 0 auto;
   border-radius: 5px;
   position: relative;
 }
-#upwrapper .item button {
+#upwrapper #filesWrapper .item button {
   cursor: pointer;
   background-color: transparent;
   border: 1px solid #54a7ad;
@@ -126,7 +152,7 @@ h1 {
   -webkit-transition: all 0.5s;
           transition: all 0.5s;
 }
-#upwrapper .item button:hover {
+#upwrapper #filesWrapper .item button:hover {
   color: #ffffff;
   background-color: rgba(113, 223, 230, 0.53);
 }

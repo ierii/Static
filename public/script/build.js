@@ -50,10 +50,10 @@ $(document).ready(function () {
 	});
 	/*初始化项目的打开和删除*/
 	ME.DOM.$wrapper.on('init', function (event) {
-		console.log('init.......');
 		var $this = $(this);
 		$this.on('click', '.delPro .theme', function (event) {
 			event.preventDefault();
+			ME.DOM.$upwrapper.show(800);
 
 		});
 		$this.on('click', '.delPro .delBtn', function (event) {
@@ -71,6 +71,9 @@ $(document).ready(function () {
 				console.log('删除请求发生一些错误！');
 			});
 		});
+	});
+	ME.DOM.$upwrapper.on('click','#closeBtn',function(event){
+		ME.DOM.$upwrapper.hide(800);
 	});
 
 });
