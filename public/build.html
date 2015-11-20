@@ -10,7 +10,7 @@
 <body>
 	<h1>静态资源列表</h1>
 	<ul id="wrapper">
-		<li class="addPro">
+		<li class="addPro" id="addTheme">
 			<input type="text" class="theme" placeholder="请填写项目的主题">
 			<button id="addProBtn">添加</button>
 		</li>
@@ -39,10 +39,10 @@
 	{@if menuList}
 	{@each menuList as item,index}
 	<li class="delPro">
-		<span class="theme" data-url="${item.url}">
+		<span class="theme" data-id="${item.id}">
 		<strong>${item.date}</strong>&nbsp;主题：<strong>${item.info}</strong>
 		</span>
-		<button class="delBtn" >删除</button>
+		<button class="delBtn" data-id="${item.id}" data-fpath="${item.fpath}">删除</button>
 	</li>
 	{@/each}
 	{@/if}

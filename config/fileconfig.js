@@ -1,4 +1,4 @@
 var config={
-	path:"../public/database/"
+	path:"public/database/"
 };
 module.exports=config;

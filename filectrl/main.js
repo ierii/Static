@@ -2,12 +2,12 @@ var fconfig = require('../config/fileconfig.js');
 var fs = require('fs');
 var filectrl = {
 	/*生成目录用的*/
-	makedir: function (foldername, handle) {
+	makeDir: function (foldername, handle) {
 		var realPName = fconfig.path + foldername;
 		if (!fs.existsSync(realPName)) {
 			fs.mkdirSync(realPName);
 		}
-		handle();
+		handle(realPName);
 	},
 	/*生成json文件用的*/
 	makeFile: function (data, handle) {
@@ -21,7 +21,7 @@ var filectrl = {
 	},
 	/*删除文件-夹*/
 	deletePath: function (path, handle) {
-		var realPath = fconfig.path + path;
+		var realPath=path;
 		if (!fs.existsSync(realPath)) return console.log('删除的文件不存在！');;
 		if (fs.statSync(realPath).isDirectory()) {
 			var filesList = fs.readdirSync(realPath);
@@ -37,7 +37,7 @@ var filectrl = {
 		handle();
 	}
 };
-var data = {
+/*var data = {
 	path: "biubiu",
 	fileName: 'biubiu.json',
 	fileObj: {
@@ -54,6 +54,6 @@ filectrl.makedir('biubiu', function () {
 			console.log('删除文件夹成功');
 		});
 	});
-});
+});*/
 
 module.exports = filectrl;

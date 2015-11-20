@@ -2,7 +2,7 @@
   "name": "static",
   "version": "1.0.0",
   "description": "this is be use to build static",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -21,8 +21,8 @@
   },
   "homepage": "https://github.com/kinglisky/Static#readme",
   "dependencies": {
+    "body-parser": "^1.14.1",
     "express": "^4.13.3",
-    "jade": "^1.11.0",
     "sqlite3": "3.0.8"
   }
 }

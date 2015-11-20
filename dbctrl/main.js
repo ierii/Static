@@ -9,7 +9,6 @@ var db = new sqlite3.Database(config.dbpath, function (err) {
 		db.run(config.createThemeTba);
 		db.run(config.createFilesTba);
 	});
-	db.close();
 	log('数据库初始化成功！');
 });
 
@@ -19,7 +18,12 @@ function log(info, result) {
 var dbctrl = {
 	insertTheme: function (data, handle) {
 		db.run(config.insertTheme, data, function (err) {
-			handle(err)
+			if (err) return console.log('插入主题出错！', err);
+			db.get(config.selectThemeOne, {
+				$fpath: data.$fpath
+			}, function (err, row) {
+				handle(err, row)
+			});
 		});
 	},
 	selectTheme: function (handle) {
