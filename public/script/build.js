@@ -96,12 +96,15 @@ $(document).ready(function () {
 		ME.DOM.$upwrapper.hide(800);
 	});
 	ME.DOM.$upwrapper.on('initUpload', function (event, data) {
-		console.log('init drogpanel.....');
-		ME.USE.$dragPanel.dropzone({
-			url: "/files",
-			maxFiles: 10,
-			maxFilesize: 512,
-			acceptedFiles: ".js,.obj,.dae"
+		console.log('init loading.....');
+		ME.DOM.$dragPanel.dmUploader({
+			url: '/files',
+			extraData: data,
+			onInit: function () {
+				console.log('上传插件初始化成功！');
+			}
+
+
 		});
 	});
 });
