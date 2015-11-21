@@ -42,6 +42,18 @@ app.route('/theme').get(function (req, res) {
 		});
 	});
 });
+/*文件目录的操作*/
+app.route('/files').get(function (req, res) {
+	res.sendfile('public/test.html');
+}).post(function (req, res) {
+	filectrl.uploadFiles(req,function(err,data){
+		if(err){
+			console.log('文件上传出错！',err);
+		}
+		console.log('the upload files:',data);
+	});
+	res.send(200);
+});
 
 
 function getMain(handle) {

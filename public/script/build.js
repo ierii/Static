@@ -2,13 +2,18 @@ $(document).ready(function () {
 	var ME = {
 		USE: {
 			mainurl: '/theme',
+			filesurl: '/files',
+			dataChche: {},
+			currId: null
 		},
 		DOM: {
 			$doc: $(document),
 			$wrapper: $('#wrapper'),
 			$upwrapper: $('#upwrapper'),
 			$menuTemplate: $('#menuTemplate'),
-			$addTheme: $('#addTheme')
+			$addTheme: $('#addTheme'),
+			$dragPanel: $('#dragPanel'),
+			$filesWrapper: $('#filesWrapper')
 		},
 		TMP: window.juicer,
 		METHODS: {}
@@ -24,6 +29,11 @@ $(document).ready(function () {
 	};
 	ME.METHODS.buildMenu = ME.METHODS.BuildDOM(ME.DOM.$wrapper, ME.DOM.$menuTemplate);
 	ME.METHODS.buildTheme = ME.TMP(ME.DOM.$menuTemplate.html());
+	ME.METHODS.setUpLoad = function (data, $dom) {
+		for (var key in data) {
+			$dom.data(key, data[key])
+		}
+	}
 	$.getJSON(ME.USE.mainurl).done(function (data) {
 		ME.METHODS.buildMenu({
 			menuList: data
@@ -54,15 +64,25 @@ $(document).ready(function () {
 		$this.on('click', '.delPro .theme', function (event) {
 			event.preventDefault();
 			ME.DOM.$upwrapper.show(800);
+			var $self = $(this),
+				id = $self.data('id'),
+				fpath = $self.data('fpath');
+			if (ME.USE.currId === id) return;
+			ME.USE.currId = id;
+			//			ME.DOM.$upwrapper.trigger('initFileLoad');
+			ME.DOM.$upwrapper.trigger('initUpload', {
+				id: id,
+				fpath: fpath
+			});
 
 		});
 		$this.on('click', '.delPro .delBtn', function (event) {
 			event.preventDefault();
-			var $self=$(this),
+			var $self = $(this),
 				id = $self.data('id'),
-				fpath=$self.data('fpath');
-			if (!(id&&fpath)) return console.log('id不存在！');
-			var deleteQuery = ME.USE.mainurl + '?id=' + id+"&fpath="+fpath;
+				fpath = $self.data('fpath');
+			if (!(id && fpath)) return console.log('id不存在！');
+			var deleteQuery = ME.USE.mainurl + '?id=' + id + "&fpath=" + fpath;
 			$.get(deleteQuery).done(function (data) {
 				if (data.err) return console.log('删除出错！');
 				$self.parent().remove();
@@ -72,8 +92,16 @@ $(document).ready(function () {
 			});
 		});
 	});
-	ME.DOM.$upwrapper.on('click','#closeBtn',function(event){
+	ME.DOM.$upwrapper.on('click', '#closeBtn', function (event) {
 		ME.DOM.$upwrapper.hide(800);
 	});
-
+	ME.DOM.$upwrapper.on('initUpload', function (event, data) {
+		console.log('init drogpanel.....');
+		ME.USE.$dragPanel.dropzone({
+			url: "/files",
+			maxFiles: 10,
+			maxFilesize: 512,
+			acceptedFiles: ".js,.obj,.dae"
+		});
+	});
 });

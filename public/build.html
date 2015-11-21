@@ -47,7 +47,7 @@
 	<script type="template" id="menuTemplate">
 		{@if menuList} {@each menuList as item,index}
 		<li class="delPro">
-			<span class="theme" data-id="${item.id}">
+			<span class="theme" data-id="${item.id}" data-fapth="${item.fpath}">
 		<strong>${item.date}</strong>&nbsp;主题：<strong>${item.info}</strong>
 		</span>
 			<button class="delBtn" data-id="${item.id}" data-fpath="${item.fpath}">删除</button>
@@ -58,7 +58,7 @@
 	<script src="script/jquery.min.js"></script>
 	<script src="script/masonry.min.js"></script>
 	<script src="script/imagesloaded.min.js"></script>
-	<script src="script/dropzone.js"></script>
+	<script src="script/dropzone.min.js"></script>
 	<script src="script/build.js"></script>
 </body>
 

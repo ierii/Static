@@ -16,6 +16,8 @@ app.use(bodyParser.urlencoded({
 
 app.use('/', routes);
 app.use('/theme', routes);
+app.use('/files',routes);
+app.use('/test',routes);
 
 /*app.use(function (req, res, next) {
 	var err = new Error('Not Found');

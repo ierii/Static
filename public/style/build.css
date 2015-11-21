@@ -113,8 +113,10 @@ h1 {
   border: 1px solid #3ea1a8;
   color: #fff;
   line-height: 300px;
-  width: 100%;
+  width: 94.6%;
   margin: 2% auto;
+  border-radius: 5px;
+  cursor: pointer;
 }
 #upwrapper #filesWrapper {
   display: block;
