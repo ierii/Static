@@ -61,7 +61,7 @@ $(document).ready(function () {
 				$content.masonry({
 					itemSelector: '.item',
 					columnWidth: '.head',
-					percentPosition: true，
+					percentPosition: true,
 					 isAnimated: true
 				});
 				$content.imagesLoaded(function () {
