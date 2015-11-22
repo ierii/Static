@@ -31,11 +31,11 @@ $(document).ready(function () {
 		}
 	};
 	ME.TMP.register('buildPath', function (path) {
-		return path.replace(/^public\//g,'');
+		return path.replace(/^public\//g, '');
 	});
 	ME.METHODS.buildMenu = ME.METHODS.BuildDOM(ME.DOM.$wrapper, ME.DOM.$menuTemplate, 'append');
 	ME.METHODS.buildTheme = ME.TMP(ME.DOM.$menuTemplate.html());
-	ME.METHODS.buildFiles = ME.METHODS.BuildDOM(ME.DOM.$filesWrapper, ME.DOM.$filesTemplate, 'prepend');
+	ME.METHODS.buildFiles = ME.METHODS.BuildDOM(ME.DOM.$filesWrapper, ME.DOM.$filesTemplate, 'append');
 	/*上传的设置选项*/
 	ME.USE.uploadOption = {
 		url: ME.USE.filesurl,
@@ -65,8 +65,8 @@ $(document).ready(function () {
 		},
 		onUploadSuccess: function (id, data) {
 			ME.DOM.$uplaodPrompt.text('成功上传 #' + id);
-			console.log('服务器返回的数据数据是：',data);
-			ME.DOM.$filesWrapper.trigger('build',[[data]]);
+			console.log('服务器返回的数据数据是：', data);
+			ME.DOM.$filesWrapper.trigger('build', [[data]]);
 		},
 		onUploadError: function (id, message) {
 			console.log('文件上传失败 #' + id + ': ' + message);
@@ -106,14 +106,14 @@ $(document).ready(function () {
 		/*添加主题*/
 		$this.on('click', '.delPro .theme', function (event) {
 			event.preventDefault();
-			ME.DOM.$upwrapper.show(800);
+			ME.DOM.$upwrapper.fadeIn('slow');
 			var $self = $(this),
 				id = $self.data('id'),
 				fpath = $self.data('fpath');
 			if (ME.USE.currId === id) return;
 			ME.USE.currId = id;
-			ME.DOM.$upwrapper.trigger('initFileLoad',{
-				sid:id
+			ME.DOM.$upwrapper.trigger('initFileLoad', {
+				sid: id
 			});
 			ME.DOM.$upwrapper.trigger('initUpload', {
 				id: id,
@@ -143,12 +143,12 @@ $(document).ready(function () {
 		ME.DOM.$upwrapper.hide(800);
 	});
 	/*初始化图片列表*/
-	ME.DOM.$upwrapper.on('initFileLoad',function(event,data){
-		var query=ME.USE.filesurl+'?sid='+data.sid;
+	ME.DOM.$upwrapper.on('initFileLoad', function (event, data) {
+		var query = ME.USE.filesurl + '?sid=' + data.sid;
 		ME.DOM.$filesWrapper.empty();
-		$.getJSON(query).done(function(data){
-			ME.DOM.$filesWrapper.trigger('build',[data]);
-		}).fail(function(){
+		$.getJSON(query).done(function (data) {
+			ME.DOM.$filesWrapper.trigger('build', [data]);
+		}).fail(function () {
 			console.log('有一些问题呀。。。。');
 		});
 	});
@@ -160,33 +160,40 @@ $(document).ready(function () {
 	});
 	/*初始化文件列表面板*/
 	ME.DOM.$filesWrapper.on('build', function (event, data) {
-		console.log('构建文件列表',data);
+		console.log('构建文件列表', data);
 		ME.METHODS.buildFiles({
 			filesList: data
 		}, function ($wrapper) {
-			$wrapper.masonry({
-				itemSelector: '.item',
-				columnWidth: '.item',
-				percentPosition: true
-			});
-			$wrapper.imagesLoaded().progress(function () {
-				$wrapper.masonry('layout');
-			});
+			$wrapper.trigger('initMasonry');
 		});
 	});
 	/*初始化文件列表的删除功能*/
-	ME.DOM.$filesWrapper.on('click','.item .del',function(event){
-		var $this=$(this),
-			id=$this.data('id'),
-			path=$this.data('path');
-		if(!(id&&path))return console.log('标签中不包含id和path');
-		var query=ME.USE.filesurl+'?id='+id+'&path='+path;
+	ME.DOM.$filesWrapper.on('click', '.item .del', function (event) {
+		var $this = $(this),
+			id = $this.data('id'),
+			path = $this.data('path');
+		if (!(id && path)) return console.log('标签中不包含id和path');
+		var query = ME.USE.filesurl + '?id=' + id + '&path=' + path;
 		$this.text('删除中...').removeClass('.del');
-		$.getJSON(query).done(function(data){
-			if(data.err)return console.log('删除数据出错：',data.err);
+		$.getJSON(query).done(function (data) {
+			if (data.err) return console.log('删除数据出错：', data.err);
 			$this.parent().hide('slow').remove();
-		}).fail(function(){
+			ME.DOM.$filesWrapper.trigger('initMasonry');
+		}).fail(function () {
 			console.log('有点问题哦哦哦');
+		});
+	});
+	ME.DOM.$filesWrapper.on('initMasonry', function (event) {
+		var $wrapper=ME.DOM.$filesWrapper;
+		$wrapper.masonry({
+			itemSelector: '.item',
+			columnWidth: '.item',
+			percentPosition: true,
+			 isAnimated: true
+		});
+		$wrapper.masonry('layout');
+		$wrapper.imagesLoaded().progress(function () {
+			$wrapper.masonry('layout');
 		});
 	});
 

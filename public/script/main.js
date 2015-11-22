@@ -52,7 +52,7 @@ $(document).ready(function () {
 			index = data.index,
 			isHidden = $this.is(':hidden');
 		var buildContent = ME.METHODS.BuildDom($this, ME.DOM.$contentTemplate);
-		/*如果是代开的证明数据已经加载过了*/
+		/*如果是为真的证明数据已经加载过了*/
 		if (!isHidden) return;
 		if (ME.USE.menuDatas[index]) return;
 		ME.USE.menuDatas[index] = url;
@@ -61,7 +61,8 @@ $(document).ready(function () {
 				$content.masonry({
 					itemSelector: '.item',
 					columnWidth: '.head',
-					percentPosition: true
+					percentPosition: true，
+					 isAnimated: true
 				});
 				$content.imagesLoaded(function () {
 					$content.prev().trigger('upstate');
