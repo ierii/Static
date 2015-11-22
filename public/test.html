@@ -4,16 +4,61 @@
 <head>
 	<meta charset="UTF-8">
 	<title>拖拽上传</title>
-	<link rel="stylesheet" href="style/basic.min.css">
-	<link rel="stylesheet" href="style/dropzone.min.css">
+	<style>
+		#dragUpload{
+			position: absolute;
+			width: 500px;
+			height: 400px;
+			top: 20%;
+			left: 50%;
+			margin-left: -250px;
+			border: 1px solid #000;
+		}
+	</style>
 </head>
 
 <body>
-	<form action="/files" enctype="multipart/form-data" method="post">
-		<input type="file" name="files" multiple="multiple">
-		<input type="text" name="path" placeholder="路径">
-		<input type="submit" value="Upload">
-	</form>
+	<div id="dragUpload">
+		<input type="file" name="files[]" multiple="multiple" title="点击我添加文件">
+	</div>
+	<script src="script/jquery.min.js"></script>
+	<script src="script/dmuploader.min.js"></script>
+	<script>
+		$(document).ready(function () {
+			$('#dragUpload').dmUploader({
+				url:'/files',
+				extraData:{
+					id:1,
+					fpath:'public/database/temp'
+				},
+				fileName:'files',
+				onInit: function(){
+ 					 console.log('Plugin successfully initialized');
+				},
+				onNewFile:function(id,file){
+					console.log('the new file:',id,file);
+				},
+				onBeforeUpload: function(id){
+  					console.log('Starting to upload #' + id);
+				},
+				onComplete: function(){
+				  	console.log('We reach the end of the upload Queue!');
+				},
+				onUploadProgress: function(id, percent){
+				  console.log('Upload of #' + id +' is at %' + percent);
+				},
+				onUploadSuccess: function(id, data){
+				  console.log('Succefully upload #' + id);
+				  console.log('Server response was:');
+				  console.log(data);
+				},
+				onUploadError: function(id, message){
+				  console.log('Error trying to upload #' + id + ': ' + message);
+				}
+
+			});
+		});
+	</script>
 </body>
 
 </html>

@@ -25,8 +25,9 @@
 	</ul>
 	<div id="upwrapper">
 		<button id="closeBtn">X</button>
-		<div id="dragPanel">请将文件拖拽到此处
-
+		<div id="dragPanel">
+			<sapn id="uplaodPrompt">请将文件拖拽到此处或单击打开</sapn>
+			<input type="file" name="files[]" multiple="multiple" title="点击已添加文件">
 		</div>
 		<div id="filesWrapper">
 			<div class="item">
@@ -47,12 +48,26 @@
 	<script type="template" id="menuTemplate">
 		{@if menuList} {@each menuList as item,index}
 		<li class="delPro">
-			<span class="theme" data-id="${item.id}" data-fapth="${item.fpath}">
+			<span class="theme" data-id="${item.id}" data-fpath="${item.fpath}">
 		<strong>${item.date}</strong>&nbsp;主题：<strong>${item.info}</strong>
 		</span>
 			<button class="delBtn" data-id="${item.id}" data-fpath="${item.fpath}">删除</button>
 		</li>
 		{@/each} {@/if}
+	</script>
+	<script type="template" id="filesTemplate">
+	{@if filesList}
+	{@each filesList as item,index}
+	<div class="item">
+		{@if item.type=="img"}
+		<img src="${item.path|buildPath}">
+		{@else}
+		<img src="database/default/file.jpg">
+		{@/if}
+		<button class="del" data-id="${item.id}" data-path="${item.path}">删除</button>
+	</div>
+	{@/each}
+	{@/if}
 	</script>
 	<script src="script/juicer-min.js"></script>
 	<script src="script/jquery.min.js"></script>

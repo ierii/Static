@@ -52,8 +52,13 @@ var dbctrl = {
 			handle(err, row);
 		});
 	},
-	deleteFiles: function (data, handle) {
-		db.run(config.deleteFiles, data, function (err) {
+	selectFile:function(data,handle){
+		db.get(config.selectFile,data,function(err,row){
+			handle(err,row);
+		});
+	},
+	deleteFile: function (data, handle) {
+		db.run(config.deleteFile, data, function (err) {
 			handle(err);
 		});
 	},

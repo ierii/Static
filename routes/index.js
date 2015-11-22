@@ -13,7 +13,6 @@ app.get('/', function (req, res, next) {
 app.route('/theme').get(function (req, res) {
 	var id = req.query.id,
 		fpath = req.query.fpath;
-	console.log(id,fpath);
 	if (id && fpath) {
 		filectrl.deletePath(fpath,function(){
 			dbctrl.deleteTheme({
@@ -44,17 +43,52 @@ app.route('/theme').get(function (req, res) {
 });
 /*文件目录的操作*/
 app.route('/files').get(function (req, res) {
-	res.sendfile('public/test.html');
+	var sid=req.query.sid,
+		id=req.query.id,
+		path=req.query.path;
+		data=null;
+		if(!(sid||(id&&path)))return console.log('没有查询参数');
+		if(sid){
+			data={
+				$sid:sid
+			};
+			dbctrl.selectFiles(data,function(err,row){
+				if(err)return console.log('查询文件列表出错',err);
+				res.send(row);
+			});
+		}
+		if(id&&path){
+			filectrl.deletePath(path,function(){
+				dbctrl.deleteFile({$id:id},function(err){
+					if(err) return res.send({err:err});
+					var data={
+						sid:id,
+						path:path.replace(/\/[^\/]+(\.\w+)$/g,'')
+
+					}
+					Eventer.emit('buildFiles',data);
+					res.send({err:null});
+				});
+			});
+		}
 }).post(function (req, res) {
 	filectrl.uploadFiles(req,function(err,data){
-		if(err){
-			console.log('文件上传出错！',err);
-		}
-		console.log('the upload files:',data);
+		if(err)return console.log('文件上传出错！',err);
+		dbctrl.insertFiles({
+			$sid:data.sid,
+			$type:data.type,
+			$mark:data.mark,
+			$path:data.fpath
+		},function(err){
+			if(err)return console.log('文件数据插入出错！',err);
+			dbctrl.selectFile({$mark:data.mark},function(err,row){
+				if(err)return console.log('查询文件数据插入出错！',err);
+				Eventer.emit('buildFiles',data);
+				res.send(row);
+			});
+		})
 	});
-	res.send(200);
 });
-
 
 function getMain(handle) {
 	dbctrl.selectTheme(function (err, row) {
@@ -66,11 +100,25 @@ Eventer.on('buildMain', function (data) {
 	console.log('build the menu');
 	getMain(function (row) {
 		var data = {
-			path: "",
+			path: "public/database/",
 			fileName: buildconfig.mainFName,
 			fileObj: row
 		}
 		filectrl.makeFile(data, function (filepath) {
+			console.log('生成文件成功：', filepath);
+		});
+	});
+});
+Eventer.on('buildFiles',function(data){
+	console.log('build the Files',data);
+	dbctrl.selectFiles({$sid:data.sid},function(err,row){
+		if(err)console.log('查询文件列表出错？',err);
+		var ndata={
+			path:data.path,
+			fileName:buildconfig.menuFName,
+			fileObj:row
+		};
+		filectrl.makeFile(ndata,function(filepath){
 			console.log('生成文件成功：', filepath);
 		});
 	});

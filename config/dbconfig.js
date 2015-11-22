@@ -11,6 +11,7 @@ var config = {
 		"id INTEGER PRIMARY KEY NOT NULL," +
 		"sid INTEGER REFERENCES theme(id) ON UPDATE CASCADE," +
 		"type TEXT NOT NULL," +
+		"mark TEXT NOT NULL,"+
 		"path TEXT NOT NULL)",
 	/*主题表的基本操作*/
 	insertTheme: "INSERT INTO theme(info,fpath)VALUES($info,$fpath)",
@@ -19,8 +20,9 @@ var config = {
 	deleteThemeFiles:"DELETE FROM files WHERE sid=$id",
 	deleteTheme:"DELETE FROM theme WHERE id=$id",
 	/*文件表的基本操作*/
-	insertFiles: "INSERT INTO files(sid,type,path)VALUES($sid,$type,$path)",
+	insertFiles: "INSERT INTO files(sid,type,mark,path)VALUES($sid,$type,$mark,$path)",
 	selectFiles: "SELECT * FROM files where sid=$sid",
-	deleteFiles:"DELETE FROM  files WHERE id=$id"
+	selectFile:"SELECT * FROM files where mark=$mark",
+	deleteFile:"DELETE FROM  files WHERE id=$id"
 }
 module.exports = config;
