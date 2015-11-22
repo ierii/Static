@@ -1,7 +1,7 @@
 $(document).ready(function () {
 	var ME = {
 		USE: {
-			mainurl:'public/data/main.json',
+			mainurl:'public/database/main.json',
 			menuDatas: {},
 			ZeroClipboardPath:'public/script/ZeroClipboard.swf',
 			basePath: ''
@@ -39,6 +39,9 @@ $(document).ready(function () {
 	ME.TMP.register('buildMURL', function (url) {
 		return '![](' + ME.USE.basePath + url + ')';
 	});
+	ME.TMP.register('buildFielsUrl', function (path) {
+		return path+'/menu.json';
+	});
 	ME.DOM.$doc.on('copyOK',function(){
 		ME.DOM.$prompt.show(400).delay(800).hide(400);
 	});
@@ -54,7 +57,7 @@ $(document).ready(function () {
 		if (ME.USE.menuDatas[index]) return;
 		ME.USE.menuDatas[index] = url;
 		$.getJSON(url).done(function (data) {
-			buildContent(data, function ($content) {
+			buildContent({filesList:data}, function ($content) {
 				$content.masonry({
 					itemSelector: '.item',
 					columnWidth: '.head',
@@ -93,7 +96,7 @@ $(document).ready(function () {
 		var buildMenu = ME.METHODS.BuildDom(ME.DOM.$wrapper, ME.DOM.$menuTemplate);
 		$.getJSON(ME.USE.mainurl)
 			.done(function (data) {
-				buildMenu(data, function ($wrapper) {
+				buildMenu({menuList:data}, function ($wrapper) {
 					$wrapper.on('click', 'li .menu', function (event) {
 						var $this = $(this),
 							url = $this.data('url'),

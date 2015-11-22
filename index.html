@@ -17,7 +17,7 @@
 	<script type="template" id="menuListTemplate">
 	{@if menuList} {@each menuList as item,index}
 	<li>
-		<div class="menu" data-url="${item.url}" data-index="${index}">
+		<div class="menu" data-url="${item.fpath|buildFielsUrl}" data-index="${index}">
 			<span class="des"><strong class="date">${item.date}</strong>  主题：<strong class="info">${item.info}</strong>
 		<i class="state"></i></span>
 		</div>
@@ -33,12 +33,12 @@
 	{@else}
 	<div class="item">
 		{@/if} {@if item.type==="img"}
-		<img src="${item.url}">
+		<img src="${item.path}">
 		{@else}
 		<img src="public/database/default/file.jpg">
 		{@/if}
-		<span class="url"><input type="text" value="${item.url|buildURL}"><button>COPY</button></span>
-		<span class="murl"><input type="text" value="${item.url|buildMURL}"><button>COPY</button></span>
+		<span class="url"><input type="text" value="${item.path|buildURL}"><button>COPY</button></span>
+		<span class="murl"><input type="text" value="${item.path|buildMURL}"><button>COPY</button></span>
 		</div>
 	{@/each} {@/if}
 	</script>

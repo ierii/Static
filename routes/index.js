@@ -18,7 +18,9 @@ app.route('/theme').get(function (req, res) {
 			dbctrl.deleteTheme({
 				$id:id
 			},function(err){
-				res.send({err:err});
+				if(err)return res.send({err:err});
+				Eventer.emit('buildMain');
+				res.send({err:null});
 			});
 		});
 	} else {
